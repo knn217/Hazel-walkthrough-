@@ -12,7 +12,7 @@ int main(int argc, char** argv)
 	HZ_INFO("Hi! Var = {0}", a);
 
 	Hazel::Application* app = Hazel::CreateApplication();
-	app->Run();
+	app->Run(); 
 	delete app;
 	return 0;
 }
