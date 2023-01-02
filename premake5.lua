@@ -14,9 +14,12 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 IncludeDir = {}
 IncludeDir["GLFW"] = "Hazel/vendor/GLFW/include"
 IncludeDir["Glad"] = "Hazel/vendor/Glad/include"
+IncludeDir["ImGui"] = "Hazel/vendor/imgui"
+
 
 include "Hazel/vendor/GLFW" -- Include "Hazel/vendor/GLFW/premake5.lua" into this "premake5.lua" file
 include "Hazel/vendor/Glad" -- Include "Hazel/vendor/Glad/premake5.lua" into this "premake5.lua" file
+include "Hazel/vendor/imgui" -- Include "Hazel/vendor/imgui/premake5.lua" into this "premake5.lua" file
 
 project "Hazel"
 	location "Hazel"
@@ -40,13 +43,15 @@ project "Hazel"
 		"%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include",
 		"%{IncludeDir.GLFW}",
-		"%{IncludeDir.Glad}"
+		"%{IncludeDir.Glad}",
+		"%{IncludeDir.ImGui}"
 	}
 
 	links
 	{
 		"GLFW",
 		"Glad",
+		"ImGui",
 		"opengl32.lib"
 	}
 
