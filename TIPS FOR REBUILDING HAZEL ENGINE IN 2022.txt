@@ -1,3 +1,5 @@
+-------11th video----------
 _Problem 1: GLFW build fail
 
 _Solution 1: change GLFW project properties -> C/C++ -> Code Generation ->Runtime Library -> Multi-threaded (/MT)
+---------------------------
