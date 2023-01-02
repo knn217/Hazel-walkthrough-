@@ -1,5 +1,10 @@
--------11th video----------
-_Problem 1: GLFW build fail
+--------11th video---------
+_Problem 1: GLFW build fail.
 
-_Solution 1: change GLFW project properties -> C/C++ -> Code Generation ->Runtime Library -> Multi-threaded (/MT)
----------------------------
+_Solution 1: change GLFW project properties -> C/C++ -> Code Generation ->Runtime Library -> Multi-threaded (/MT).
+
+
+--------13th video---------
+_Problem 1: Assertion failed error if run code modified after commit and video's instruction.
+
+_Solution 1: Run GenerateProject.bat before debugging and running.

@@ -39,8 +39,9 @@ namespace Hazel {
 
 	class HAZEL_API Event  // Base class for events
 	{
-		friend class EventDispatcher;   // This is for Window to acess Application's events even without knowing about Application 
+		//friend class EventDispatcher;   // This is for Window to acess Application's events even without knowing about Application 
 	public:
+		bool Handled = false;
 		// virtual functions
 		virtual EventType GetEventType() const = 0;
 		virtual const char* GetName() const = 0;
@@ -51,8 +52,8 @@ namespace Hazel {
 		{
 			return GetCategoryFlags() & category;
 		}
-	protected:
-		bool m_Handled = false;  // To see if an event is handled
+	//protected:
+		//bool m_Handled = false;  // To see if an event is handled
 	};
 
 	class EventDispatcher  // EventDispatcher's definition
@@ -70,7 +71,7 @@ namespace Hazel {
 		{
 			if (m_Event.GetEventType() == T::GetStaticType())
 			{
-				m_Event.m_Handled = func(*(T*)&m_Event);
+				m_Event.Handled = func(*(T*)&m_Event);
 				return true;
 			}
 			return false;

@@ -19,12 +19,29 @@ namespace Hazel
 	{
 	}
 
+	void Application::PushLayer(Layer* layer)
+	{
+		m_LayerStack.PushLayer(layer);
+	}
+
+	void Application::PushOverlay(Layer* layer)
+	{
+		m_LayerStack.PushOverlay(layer);
+	}
+
 	void Application::OnEvent(Event& e)
 	{
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(OnWindowClose));
 
-		HZ_CORE_TRACE("{0}", e);
+		//HZ_CORE_TRACE("{0}", e);
+		
+		for (auto it = m_LayerStack.end(); it != m_LayerStack.begin(); ) // go backward (from top to bottom) through the LayerStack
+		{
+			(*--it)->OnEvent(e); // Call OnEvent whenever an event is received
+			if (e.Handled)       // If the event is handled by a layer "L"
+				break;           // break so that the layers under layer "L" don't have to deal with it
+		}
 	}
 
 	void Application::Run()
@@ -33,6 +50,10 @@ namespace Hazel
 		{
 			glClearColor(1, 0, 1, 1);
 			glClear(GL_COLOR_BUFFER_BIT);
+			
+			for (Layer* layer : m_LayerStack)
+				layer->OnUpdate();
+
 			m_Window->OnUpdate();
 		}
 	}
